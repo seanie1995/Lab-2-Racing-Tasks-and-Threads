@@ -53,19 +53,19 @@ namespace Lab_2
                 await Console.Out.WriteLineAsync($"{car.name} finished the race at place: {place + 1}");
             }                     
 
-            if (place == 4 )
+            if (place == 4)
             {
                 Console.ForegroundColor= ConsoleColor.Green;
                 await Task.Delay(1000);
                 await Console.Out.WriteLineAsync($"Race completed. Results will show shortly:");
                 Console.ResetColor();
-                
+               
             }
         }    
         public static async Task CarProblems(Car car)
         {
             Random rnd = new Random();
-            Console.ForegroundColor = ConsoleColor.Red;
+            
             if (rnd.Next(1, 10) == 1)
             {
                 await Console.Out.WriteLineAsync($"{car.name} has run out of gas. 30 second delay!");
@@ -83,12 +83,9 @@ namespace Lab_2
             }
             else if (rnd.Next(8, 10) == 8)
             {
-                await Console.Out.WriteLineAsync($"{car.name} got engine problems! Car is travelling 1 km/h slower from now on!");
-                car.speed -= 1;               
+                await Console.Out.WriteLineAsync($"{car.name} got engine problems! Car is travelling 10 km/h slower from now on!");
+                car.speed -= 10;               
             }
-            Console.ResetColor();
-            
-            
         }      
         public static async Task RaceProgress(List<Car> cars, List<Car> carPlace)
         {
