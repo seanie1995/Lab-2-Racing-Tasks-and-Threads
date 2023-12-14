@@ -15,8 +15,7 @@ namespace Lab_2
     internal class CarMethods
     {
                        
-        private static readonly object lockObject = new object();
-        private static readonly object colorLock = new object();
+        private static readonly object lockObject = new object();      
         static Stopwatch stopwatch = new Stopwatch();
         
         public static async Task DriveAsync(Car car, List<Car> carPlace)
@@ -31,7 +30,7 @@ namespace Lab_2
                     await CarProblems(car);
                     stopwatch.Restart(); 
                 }
-                car.distanceTravelled = i;                             
+                car.distanceTravelled = i;
                 await Task.Delay(car.speed * 5);
                               
             }         
@@ -51,14 +50,13 @@ namespace Lab_2
             else
             {
                 await Console.Out.WriteLineAsync($"{car.name} finished the race at place: {place + 1}");
-            }                     
-
+            }                           
             if (place == 4)
             {
-                Console.ForegroundColor= ConsoleColor.Green;
-                await Task.Delay(1000);
-                await Console.Out.WriteLineAsync($"Race completed. Results will show shortly:");
-                Console.ResetColor();            
+                Console.Clear();
+                await Console.Out.WriteLineAsync("Race is over!");
+                await Console.Out.WriteLineAsync("Press [Enter] if results screen doesn't load automatically in a few seconds:");
+
             }
         }    
         public static async Task CarProblems(Car car)
@@ -68,7 +66,7 @@ namespace Lab_2
             Console.ForegroundColor = ConsoleColor.Red;
             if (random == 1)
             {
-                await Console.Out.WriteLineAsync($"{car.name} has run out of gas. 30 second delay!");
+                await Console.Out.WriteLineAsync($"{car.name} was hit by the spikey blue shell. 30 second delay!");
                 await Task.Delay(30000);
             }
             else if (random == 2 || random == 3)
@@ -88,7 +86,7 @@ namespace Lab_2
             }
             else if (random >= 19 && random <= 50)
             {
-                await Console.Out.WriteLineAsync($"{car.name} got engine problems! Car is travelling 10 km/h slower from now on!");
+                await Console.Out.WriteLineAsync($"{car.name} got engine problems! Car is 10km/h slower!");
                 car.speed -= 10;               
             }
         }      
@@ -96,6 +94,7 @@ namespace Lab_2
         {
             if (carPlace.Count == 5)
             {
+                await Task.Delay(1000);
                 await PrintRaceResults(carPlace);               
             }
 
@@ -107,7 +106,7 @@ namespace Lab_2
                 {
                     if (car.distanceTravelled != 100)
                     {
-                        await Console.Out.WriteLineAsync($"{car.name}: {car.distanceTravelled}KM || Speed: {car.speed} KM/H.");
+                        await Console.Out.WriteLineAsync($"{car.name}: {car.distanceTravelled}km || Speed: {car.speed} km/h.");
                     }
                     else if (car.distanceTravelled == 100)
                     {
@@ -126,24 +125,27 @@ namespace Lab_2
         {
             Console.Clear();
             await Console.Out.WriteLineAsync("RACE RESULTS!");
-            lock (lockObject)
+            
+            Console.ForegroundColor= ConsoleColor.Yellow;
+            await Console.Out.WriteLineAsync($"--------------------------------------------");
+            
+            for (int i = 0; i < carPlace.Count; i++)
             {
-                Console.ForegroundColor= ConsoleColor.Yellow;
-                Console.Out.WriteLineAsync($"--------------------------------------------");
-                for (int i = 0; i < carPlace.Count; i++)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Green;
                     
-                    Console.Out.WriteLineAsync($"{i + 1}: {carPlace[i].name}");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Out.WriteLineAsync($"--------------------------------------------");
-                }
-                Console.ResetColor();
+                await Console.Out.WriteLineAsync($"{i + 1}: {carPlace[i].name}");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                await Console.Out.WriteLineAsync($"--------------------------------------------");
+            }
+            Console.ResetColor();          
+
+            while (true)
+            {
+                await Console.Out.WriteLineAsync("Press enter to quit");
+                Console.ReadKey();
+                Environment.Exit(0);
             }
 
-            await Console.Out.WriteLineAsync("Press enter to exit program:");
-            Console.ReadKey();
-            Environment.Exit(1);
         }
 
         
