@@ -43,7 +43,7 @@ namespace Lab_2
 
             int place = carPlace.IndexOf(car);
 
-            
+            Console.ResetColor();
             if (place == 0)
             {               
                 await Console.Out.WriteLineAsync($"{car.name} has finished the race at 1st place!");              
@@ -58,14 +58,13 @@ namespace Lab_2
                 Console.ForegroundColor= ConsoleColor.Green;
                 await Task.Delay(1000);
                 await Console.Out.WriteLineAsync($"Race completed. Results will show shortly:");
-                Console.ResetColor();
-               
+                Console.ResetColor();            
             }
         }    
         public static async Task CarProblems(Car car)
         {
             Random rnd = new Random();
-            
+            Console.ForegroundColor = ConsoleColor.Red;
             if (rnd.Next(1, 10) == 1)
             {
                 await Console.Out.WriteLineAsync($"{car.name} has run out of gas. 30 second delay!");
@@ -135,6 +134,10 @@ namespace Lab_2
                 }
                 Console.ResetColor();
             }
+
+            await Console.Out.WriteLineAsync("Press enter to exit program:");
+            Console.ReadKey();
+            Environment.Exit(1);
         }
 
         

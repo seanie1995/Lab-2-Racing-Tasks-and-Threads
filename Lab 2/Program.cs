@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Metrics;
+﻿using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Timers;
 
 // Try using countdown event.
@@ -34,12 +35,21 @@ namespace Lab_2
             //    }
             //}
 
+            Stopwatch timer = new Stopwatch();
+
+            timer.Start();
+
             while (true)
             {
                 Console.Clear();
-                await CarMethods.RaceProgress(carsList, carPlace);
-                await Task.Delay(5000);
+                Console.ResetColor();
+                await Console.Out.WriteLineAsync($"{timer.Elapsed.TotalSeconds:F0} seconds passed");
+                await CarMethods.RaceProgress(carsList, carPlace);             
+                Thread.Sleep(5000);                             
             }
+
+            
+
 
 
             //await Task.WhenAll(raceTasks);
