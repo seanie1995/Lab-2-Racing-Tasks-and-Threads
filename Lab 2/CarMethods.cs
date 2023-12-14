@@ -64,23 +64,24 @@ namespace Lab_2
         public static async Task CarProblems(Car car)
         {
             Random rnd = new Random();
+            int random = rnd.Next(1, 51);
             Console.ForegroundColor = ConsoleColor.Red;
-            if (rnd.Next(1, 10) == 1)
+            if (random == 1)
             {
                 await Console.Out.WriteLineAsync($"{car.name} has run out of gas. 30 second delay!");
                 await Task.Delay(30000);
             }
-            else if (rnd.Next(2, 10) == 2)
+            else if (random == 2 || random == 3)
             {
                 await Console.Out.WriteLineAsync($"{car.name} got a flat tire! 20 second delay!");
                 await Task.Delay(20000);
             }
-            else if (rnd.Next(5, 10) == 5)
+            else if (random >= 4 && random <= 8)
             {
                 await Console.Out.WriteLineAsync($"{car.name} has committed vehicular homicide on a bird! 10 second delay!");
                 await Task.Delay(10000);
             }
-            else if (rnd.Next(8, 10) == 8)
+            else if (random >= 9 && random <= 18)
             {
                 await Console.Out.WriteLineAsync($"{car.name} got engine problems! Car is travelling 10 km/h slower from now on!");
                 car.speed -= 10;               

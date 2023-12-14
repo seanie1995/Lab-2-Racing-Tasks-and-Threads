@@ -6,11 +6,13 @@ using System.Timers;
 namespace Lab_2
 {
     internal class Program
-    {       
+    {
+
+        
         static async Task Main(string[] args)
         {
 
-            bool race = true;
+            
             Car car1 = new Car("Carson");
             Car car2 = new Car("Trucksdottir");
             Car car3 = new Car("Bilberg");
@@ -21,7 +23,6 @@ namespace Lab_2
             List<Car> carPlace = new List<Car> { };
             List<Task> raceTasks = carsList.Select(car => Task.Run(async () => await CarMethods.DriveAsync(car, carPlace))).ToList();
             await Console.Out.WriteLineAsync("Race started!");
-
 
             //while (carPlace.Count != 5)
             //{
@@ -36,7 +37,6 @@ namespace Lab_2
             //}
 
             Stopwatch timer = new Stopwatch();
-
             timer.Start();
 
             while (true)
@@ -49,14 +49,6 @@ namespace Lab_2
             }
 
             
-
-
-
-            //await Task.WhenAll(raceTasks);
-
-            //Console.Clear();
-            //await CarMethods.PrintRaceResults(carPlace);
-
         }               
         
     }
