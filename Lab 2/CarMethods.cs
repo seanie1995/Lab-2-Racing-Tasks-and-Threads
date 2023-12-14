@@ -83,6 +83,11 @@ namespace Lab_2
             }
             else if (random >= 9 && random <= 18)
             {
+                await Console.Out.WriteLineAsync($"{car.name} had to avoid a moose!! 5 second delay!");
+                await Task.Delay(5000);
+            }
+            else if (random >= 19 && random <= 50)
+            {
                 await Console.Out.WriteLineAsync($"{car.name} got engine problems! Car is travelling 10 km/h slower from now on!");
                 car.speed -= 10;               
             }
