@@ -2,7 +2,10 @@
 using System.Diagnostics.Metrics;
 using System.Timers;
 
-// Try using countdown event.
+// Jag har gjort denna uppgift med tasks istället. Jag tyckte att det var lämpligast med ett race.
+// Jag gjorde så att användaren kan också få ett automatisk-uppdaterings-läge där programmet visar hur tävlingen går var 5e sekund istället för att trycka på
+// enter hela tiden. Jag gjorde också så att ett slumpvis händelse händer var 10e sekund för att jag tyckte att det gjorde tävligen roligare. 
+
 namespace Lab_2
 {
     internal class Program
@@ -33,6 +36,7 @@ namespace Lab_2
             while (input == "1")
             {
                 await Console.Out.WriteLineAsync("Press enter to see race status:");
+                
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 if (keyInfo.Key == ConsoleKey.Enter)
                 {
@@ -45,8 +49,7 @@ namespace Lab_2
             timer.Start();
 
             while (input == "2")
-            {
-                
+            {               
                 Console.Clear();
                 Console.ResetColor();
                 if (carPlace.Count != 5)

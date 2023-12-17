@@ -56,7 +56,6 @@ namespace Lab_2
                 Console.Clear();
                 await Console.Out.WriteLineAsync("Race is over!");
                 await Console.Out.WriteLineAsync("Press [Enter] if results screen doesn't load automatically in a few seconds:");
-
             }
         }    
         public static async Task CarProblems(Car car)
